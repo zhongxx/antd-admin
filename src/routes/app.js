@@ -56,6 +56,7 @@ const App = ({ children, dispatch, app, loading, location }) => {
 
   const siderProps = {
     menu,
+    location,
     siderFold,
     darkTheme,
     navOpenKeys,
@@ -70,6 +71,7 @@ const App = ({ children, dispatch, app, loading, location }) => {
 
   const breadProps = {
     menu,
+    location,
   }
   if (openPages && openPages.includes(pathname)) {
     return (<div>

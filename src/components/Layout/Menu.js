@@ -1,4 +1,3 @@
-/* global location */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Menu, Icon } from 'antd'
@@ -6,7 +5,7 @@ import { Link } from 'dva/router'
 import { arrayToTree, queryArray } from 'utils'
 import pathToRegexp from 'path-to-regexp'
 
-const Menus = ({ siderFold, darkTheme, handleClickNavMenu, navOpenKeys, changeOpenKeys, menu }) => {
+const Menus = ({ siderFold, darkTheme, handleClickNavMenu, navOpenKeys, changeOpenKeys, menu, location }) => {
   // 生成树状
   const menuTree = arrayToTree(menu.filter(_ => _.mpid !== '-1'), 'id', 'mpid')
   const levelMap = {}
@@ -123,6 +122,7 @@ Menus.propTypes = {
   handleClickNavMenu: PropTypes.func,
   navOpenKeys: PropTypes.array,
   changeOpenKeys: PropTypes.func,
+  location: PropTypes.object,
 }
 
 export default Menus
