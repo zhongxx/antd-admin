@@ -29,7 +29,7 @@ module.exports = (webpackConfig, env) => {
     new CopyWebpackPlugin([
       {
         from: 'src/public',
-        to: production ? '../' : webpackConfig.output.outputPath,
+        to: production ? '../../' : webpackConfig.output.outputPath,
       },
     ]),
     new HtmlWebpackPlugin({

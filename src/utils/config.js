@@ -2,12 +2,12 @@ const APIV1 = '/api/v1'
 const APIV2 = '/api/v2'
 
 module.exports = {
-  name: 'AntD Admin',
-  prefix: 'antdAdmin',
-  footerText: 'Ant Design Admin  © 2017 zuiidea',
-  logo: '/logo.png',
-  iconFontCSS: '/iconfont.css',
-  iconFontJS: '/iconfont.js',
+  name: '服务开通云化',
+  prefix: 'iom-web',
+  footerText: '中兴软创  © 2017 ',
+  logo: '/iom-web/resources/react/logo.png',
+  iconFontCSS: '/iom-web/resources/react/iconfont.css',
+  iconFontJS: '/iom-web/resources/react/iconfont.js',
   CORS: [],
   openPages: ['/login'],
   apiPrefix: '/api/v1',

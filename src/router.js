@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Switch, Route, Redirect, routerRedux } from 'dva/router'
+import {Switch, Route, Redirect, routerRedux} from 'dva/router'
 import dynamic from 'dva/dynamic'
 import App from 'routes/app'
 
-const { ConnectedRouter } = routerRedux
+const {ConnectedRouter} = routerRedux
 
-const Routers = function ({ history, app }) {
+const Routers = function ({history, app}) {
   const error = dynamic({
     app,
     component: () => import('./routes/error'),
@@ -19,7 +19,7 @@ const Routers = function ({ history, app }) {
     }, {
       path: '/user',
       models: () => [import('./models/user')],
-      component: () => import('./routes/user/'),
+      component: () => import('./routes/hello/'),
     }, {
       path: '/user/:id',
       models: () => [import('./models/user/detail')],
@@ -62,6 +62,9 @@ const Routers = function ({ history, app }) {
       path: '/post',
       models: () => [import('./models/post')],
       component: () => import('./routes/post/'),
+    }, {
+      path: '/hello',
+      component: () => import('./routes/hello/'),
     },
   ]
 
@@ -69,20 +72,20 @@ const Routers = function ({ history, app }) {
     <ConnectedRouter history={history}>
       <App>
         <Switch>
-          <Route exact path="/" render={() => (<Redirect to="/dashboard" />)} />
+          <Route exact path="/" render={() => (<Redirect to="/dashboard"/>)}/>
           {
-            routes.map(({ path, ...dynamics }, key) => (
+            routes.map(({path, ...dynamics}, key) => (
               <Route key={key}
-                exact
-                path={path}
-                component={dynamic({
-                  app,
-                  ...dynamics,
-                })}
+                     exact
+                     path={path}
+                     component={dynamic({
+                       app,
+                       ...dynamics,
+                     })}
               />
             ))
           }
-          <Route component={error} />
+          <Route component={error}/>
         </Switch>
       </App>
     </ConnectedRouter>
