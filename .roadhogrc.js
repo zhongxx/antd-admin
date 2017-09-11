@@ -10,8 +10,8 @@ export default {
   entry: 'src/index.js',
   svgSpriteLoaderDirs: svgSpriteDirs,
   theme: "./theme.config.js",
-  publicPath: `/${version}/`,
-  outputPath: `./dist/${version}`,
+  publicPath: `/iom-web/rHome/`,
+  outputPath: `./iom-web/rHome/`,
   // 接口代理示例
   proxy: {
     "/api/v1/weather": {
