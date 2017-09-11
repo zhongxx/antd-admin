@@ -3,25 +3,25 @@ import React from 'react'
 import NProgress from 'nprogress'
 import PropTypes from 'prop-types'
 import pathToRegexp from 'path-to-regexp'
-import { connect } from 'dva'
-import { Layout, Loader } from 'components'
-import { classnames, config } from 'utils'
-import { Helmet } from 'react-helmet'
-import { withRouter } from 'dva/router'
+import {connect} from 'dva'
+import {Layout, Loader} from 'components'
+import {classnames, config} from 'utils'
+import {Helmet} from 'react-helmet'
+import {withRouter} from 'dva/router'
 import '../themes/index.less'
 import './app.less'
 import Error from './error'
 
-const { prefix, openPages } = config
+const {prefix, openPages} = config
 
-const { Header, Bread, Footer, Sider, styles } = Layout
+const {Header, Bread, Footer, Sider, styles} = Layout
 let lastHref
 
-const App = ({ children, dispatch, app, loading, location }) => {
-  const { user, siderFold, darkTheme, isNavbar, menuPopoverVisible, navOpenKeys, menu, permissions } = app
-  let { pathname } = location
+const App = ({children, dispatch, app, loading, location}) => {
+  const {user, siderFold, darkTheme, isNavbar, menuPopoverVisible, navOpenKeys, menu, permissions} = app
+  let {pathname} = location
   pathname = pathname.startsWith('/') ? pathname : `/${pathname}`
-  const { iconFontJS, iconFontCSS, logo } = config
+  const {iconFontJS, iconFontCSS, logo} = config
   const current = menu.filter(item => pathToRegexp(item.route || '').exec(pathname))
   const hasPermission = current.length ? permissions.visit.includes(current[0].id) : false
   const href = window.location.href
@@ -42,17 +42,17 @@ const App = ({ children, dispatch, app, loading, location }) => {
     isNavbar,
     menuPopoverVisible,
     navOpenKeys,
-    switchMenuPopover () {
-      dispatch({ type: 'app/switchMenuPopver' })
+    switchMenuPopover() {
+      dispatch({type: 'app/switchMenuPopver'})
     },
-    logout () {
-      dispatch({ type: 'app/logout' })
+    logout() {
+      dispatch({type: 'app/logout'})
     },
-    switchSider () {
-      dispatch({ type: 'app/switchSider' })
+    switchSider() {
+      dispatch({type: 'app/switchSider'})
     },
-    changeOpenKeys (openKeys) {
-      dispatch({ type: 'app/handleNavOpenKeys', payload: { navOpenKeys: openKeys } })
+    changeOpenKeys(openKeys) {
+      dispatch({type: 'app/handleNavOpenKeys', payload: {navOpenKeys: openKeys}})
     },
   }
 
@@ -62,12 +62,12 @@ const App = ({ children, dispatch, app, loading, location }) => {
     siderFold,
     darkTheme,
     navOpenKeys,
-    changeTheme () {
-      dispatch({ type: 'app/switchTheme' })
+    changeTheme() {
+      dispatch({type: 'app/switchTheme'})
     },
-    changeOpenKeys (openKeys) {
+    changeOpenKeys(openKeys) {
       window.localStorage.setItem(`${prefix}navOpenKeys`, JSON.stringify(openKeys))
-      dispatch({ type: 'app/handleNavOpenKeys', payload: { navOpenKeys: openKeys } })
+      dispatch({type: 'app/handleNavOpenKeys', payload: {navOpenKeys: openKeys}})
     },
   }
 
@@ -77,22 +77,23 @@ const App = ({ children, dispatch, app, loading, location }) => {
   }
   if (openPages && openPages.includes(pathname)) {
     return (<div>
-      <Loader fullScreen spinning={loading.effects['app/query']} />
+      <Loader fullScreen spinning={loading.effects['app/query']}/>
       {children}
     </div>)
   }
   return (
     <div>
-      <Loader fullScreen spinning={loading.effects['app/query']} />
+      <Loader fullScreen spinning={loading.effects['app/query']}/>
       <Helmet>
-        <title>ANTD ADMIN</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href={logo} type="image/x-icon" />
-        {iconFontJS && <script src={iconFontJS} />}
-        {iconFontCSS && <link rel="stylesheet" href={iconFontCSS} />}
+        <title>服务开通云化</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="icon" href={logo} type="image/x-icon"/>
+        {iconFontJS && <script src={iconFontJS}/>}
+        {iconFontCSS && <link rel="stylesheet" href={iconFontCSS}/>}
       </Helmet>
-      <div className={classnames(styles.layout, { [styles.fold]: isNavbar ? false : siderFold }, { [styles.withnavbar]: isNavbar })}>
-        {!isNavbar ? <aside className={classnames(styles.sider, { [styles.light]: !darkTheme })}>
+      <div
+        className={classnames(styles.layout, {[styles.fold]: isNavbar ? false : siderFold}, {[styles.withnavbar]: isNavbar})}>
+        {!isNavbar ? <aside className={classnames(styles.sider, {[styles.light]: !darkTheme})}>
           {siderProps.menu.length === 0 ? null : <Sider {...siderProps} />}
         </aside> : ''}
         <div className={styles.main}>
@@ -100,10 +101,10 @@ const App = ({ children, dispatch, app, loading, location }) => {
           <Bread {...breadProps} />
           <div className={styles.container}>
             <div className={styles.content}>
-              {hasPermission ? children : <Error />}
+              {hasPermission ? children : <Error/>}
             </div>
           </div>
-          <Footer />
+          <Footer/>
         </div>
       </div>
     </div>
@@ -118,4 +119,4 @@ App.propTypes = {
   loading: PropTypes.object,
 }
 
-export default withRouter(connect(({ app, loading }) => ({ app, loading }))(App))
+export default withRouter(connect(({app, loading}) => ({app, loading}))(App))
